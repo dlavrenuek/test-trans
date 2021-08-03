@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from "react";
+import {Trans} from "react-i18next";
+import i18n from "i18next";
+import {initReactI18next} from "react-i18next";
+
+i18n
+    .use(initReactI18next)
+    .init();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [text, setText] = useState('');
+    return (
+        <>
+            <input
+                placeholder="Enter some text with '{{ text }}' inside"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                style={{display: 'inline-block', width: '95%'}}
+            />
+            <p><Trans>You entered: {{text}}</Trans></p>
+        </>
+    );
 }
 
 export default App;
